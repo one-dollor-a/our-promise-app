@@ -10,6 +10,7 @@
 
 ```bash
   dart pub get
+  flutter pub run build_runner
   flutter start
 ```
 

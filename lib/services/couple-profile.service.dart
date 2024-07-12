@@ -1,10 +1,10 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:our_promise/models/sample-couple-profile.model.dart';
+import 'package:our_promise/models/couple-profile.model.dart';
 
 class CoupleProfileService {
-  static final String _url = '${dotenv.get('BASE_URL')}/couple-profile';
+  static final String _url = '${dotenv.get('BASE_URL')}/coupleInfo';
 
   static Future<CoupleProfile> getCoupleProfile() async {
     try {

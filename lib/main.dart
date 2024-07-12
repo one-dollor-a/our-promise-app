@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:our_promise/common/theme.dart';
 import 'package:our_promise/components/bottom-navigation.comp.dart';
 import 'package:our_promise/pages/contract.page.dart';
@@ -10,7 +11,11 @@ import 'package:our_promise/pages/shared-profile.page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // 1번코드
   await dotenv.load(fileName: ".env"); // 2번코드
-  runApp(MainApp());
+  runApp(
+    ProviderScope(
+      child: MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -26,15 +31,22 @@ class MainApp extends StatelessWidget {
         bottomNavigationBar: BottomNavigationComp(
           pageController: _pageController,
         ),
-        body: SafeArea(
-          child: PageView(
-            controller: _pageController,
-            children: const <Widget>[
-              MainPage(),
-              ContractPage(),
-              SharedProfilePage(),
-              MyProfilePage()
-            ],
+        body: DecoratedBox(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/background.png"),
+                fit: BoxFit.cover),
+          ),
+          child: SafeArea(
+            child: PageView(
+              controller: _pageController,
+              children: const <Widget>[
+                MainPage(),
+                ContractPage(),
+                SharedProfilePage(),
+                MyProfilePage()
+              ],
+            ),
           ),
         ),
       ),

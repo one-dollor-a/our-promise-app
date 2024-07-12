@@ -10,9 +10,17 @@ ThemeData initThemeData({required Brightness brightness}) {
       ),
       textTheme: const TextTheme(
         bodyMedium: TextStyle(color: Color(0xFF552B2B)), // 일반 텍스트
+        titleMedium: TextStyle(
+            color: Color(0xFF552B2B),
+            fontSize: 32,
+            fontWeight: FontWeight.w700), // 큰 텍스트
+        titleLarge: TextStyle(
+            color: Color(0xFF552B2B),
+            fontSize: 52,
+            fontWeight: FontWeight.w700), // 큰 텍스트
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Color(0xFFFFF4F4), // 바텀 네비게이션 배경 색
+        backgroundColor: Color(0xffFBE6E0), // 바텀 네비게이션 배경 색
         unselectedLabelStyle:
             TextStyle(color: Colors.black, fontSize: 10), // 라벨 스타일
       ),
