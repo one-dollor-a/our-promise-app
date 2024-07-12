@@ -6,10 +6,10 @@ ThemeData initThemeData({required Brightness brightness}) {
       brightness: Brightness.light,
       colorScheme: const ColorScheme.light(
         primary: Color(0xffFDC4C4), // 주요 색상
-        secondary: Colors.orange, // 보조 색상
+        secondary: Color(0xFF552B2B), // 보조 색상
       ),
       textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: Color(0xFF552B2B)), // 일반 텍스트
+        bodyMedium: TextStyle(color: Color(0xFF552B2B), fontSize: 18), // 일반 텍스트
         titleMedium: TextStyle(
             color: Color(0xFF552B2B),
             fontSize: 32,
@@ -25,6 +25,9 @@ ThemeData initThemeData({required Brightness brightness}) {
             TextStyle(color: Colors.black, fontSize: 10), // 라벨 스타일
       ),
       scaffoldBackgroundColor: const Color(0xFFFFF4F4), // 배경색
+      tabBarTheme: const TabBarTheme(
+        labelStyle: TextStyle(color: Colors.black, fontSize: 14), // 탭 스타일
+      ),
     );
   } else {
     return ThemeData(
