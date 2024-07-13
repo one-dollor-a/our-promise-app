@@ -1,14 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:our_promise/services/auth.service.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
+  @override
+  LandingPageState createState() => LandingPageState();
+}
+
+class LandingPageState extends State<LandingPage> {
   _signIn(BuildContext context) {
     Navigator.pushNamed(context, '/sign-in');
   }
 
   _signUp(BuildContext context) {
     Navigator.pushNamed(context, '/sign-up');
+  }
+
+  static String? token;
+
+  static const storage = FlutterSecureStorage();
+  @override
+  void initState() {
+    super.initState();
+
+    //비동기로 flutter secure storage 정보를 불러오는 작업.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _getTokenThenNavigate();
+    });
+  }
+
+  _getTokenThenNavigate() async {
+    token = await AuthService.getToken();
+
+    if (token != null) {
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+    }
   }
 
   @override
