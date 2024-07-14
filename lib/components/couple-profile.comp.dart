@@ -8,26 +8,29 @@ class CoupleProfileComp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<CoupleProfile> coupleProfile =
-        ref.watch(coupleProfileProvider);
+    final coupleProfile = ref.watch(coupleProfileProvider);
+
     return Center(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: switch (coupleProfile) {
-            AsyncData(:final value) => _buildCoupleProfile(context, value),
-            AsyncError(:final error) => [Text(error.toString())],
-            _ => [const CircularProgressIndicator()],
+            null => _buildNullCoupleProfile(context),
+            _ => _buildCoupleProfile(context, coupleProfile),
           }),
     );
   }
 
   _buildCoupleProfile(BuildContext context, CoupleProfile coupleProfile) {
     return [
-      Text('${coupleProfile.name}',
-          style: Theme.of(context).textTheme.titleMedium),
-      Text('${coupleProfile.dDay}',
-          style: Theme.of(context).textTheme.titleLarge),
+      Text(coupleProfile.name, style: Theme.of(context).textTheme.titleMedium),
+      Text(coupleProfile.dDay, style: Theme.of(context).textTheme.titleLarge),
+    ];
+  }
+
+  _buildNullCoupleProfile(BuildContext context) {
+    return [
+      Text('커플등록하러가기', style: Theme.of(context).textTheme.titleMedium),
     ];
   }
 }

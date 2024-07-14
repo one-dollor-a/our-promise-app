@@ -1,11 +1,26 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:our_promise/models/couple-profile.model.dart';
-import 'package:our_promise/services/couple-profile.service.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'couple-profile.provider.g.dart';
+class CoupleProfileNotifier extends Notifier<CoupleProfile?> {
+  @override
+  CoupleProfile? build() {
+    return null;
+  }
 
-@riverpod
-Future<CoupleProfile> coupleProfile(CoupleProfileRef ref) async {
-  final result = CoupleProfileService.getCoupleProfile();
-  return result;
+  void setNullCoupleProfile() {
+    state = null;
+  }
+
+  void setCoupleProfile(int id, String name, DateTime firstDate) {
+    state = CoupleProfile(
+      id: id,
+      name: name,
+      firstDate: firstDate,
+    );
+  }
 }
+
+final coupleProfileProvider =
+    NotifierProvider<CoupleProfileNotifier, CoupleProfile?>(() {
+  return CoupleProfileNotifier();
+});

@@ -1,45 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:our_promise/components/couple-profile.comp.dart';
-import 'package:our_promise/models/couple-profile.model.dart';
 import 'package:our_promise/providers/couple-profile.provider.dart';
+import 'package:our_promise/services/couple-profile.service.dart';
 
-class MainPage extends ConsumerWidget {
+class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<CoupleProfile> coupleProfile =
-        ref.watch(coupleProfileProvider);
-    return Center(
-      child: switch (coupleProfile) {
-        AsyncData(:final value) => _buildCoupleProfile(value),
-        AsyncError(:final error) => Text(error.toString()),
-        _ => const CircularProgressIndicator(),
-      },
-    );
-  }
-
-  _buildCoupleProfile(CoupleProfile coupleProfile) {
-    if (coupleProfile.id == null) {
-      return const Text('no');
-    } else {
-      return const CoupleProfileComp();
-    }
-  }
+  MainPageState createState() => MainPageState();
 }
 
+class MainPageState extends ConsumerState<MainPage> {
+  @override
+  initState() {
+    super.initState();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final isCoupled = ref.read(coupleProfileProvider) != null;
 
-// child: coupleProfile.when(
-        //   data: (value) {
-        //     if (value.id != null) {
-        //       // 가정: id가 null이 아닐 때 유효하다고 가정
-        //       return Text('name: ${value.name}');
-        //     } else {
-        //       return Text('no');
-        //     }
-        //   },
-        //   error: (error, stack) => Text(error.toString()),
-        //   loading: () => const CircularProgressIndicator(),
-        // ),
+      if (isCoupled) {
+        return;
+      }
+
+      CoupleProfileService.getCoupleProfile().then((coupleProfile) {
+        if (coupleProfile != null) {
+          ref.read(coupleProfileProvider.notifier).setCoupleProfile(
+                coupleProfile.id,
+                coupleProfile.name,
+                coupleProfile.firstDate,
+              );
+        } else {
+          ref.read(coupleProfileProvider.notifier).setNullCoupleProfile();
+        }
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: CoupleProfileComp());
+  }
+}
