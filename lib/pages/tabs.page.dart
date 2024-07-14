@@ -34,6 +34,5 @@ class TabsPage extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
