@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class AuthService {
   // static final String _url = '${dotenv.get('BASE_URL')}';
-  static const String _url = 'https://dummyjson.com/auth/login';
+  static const String _url = 'https://dummyjson.com/auth';
   static const storage = FlutterSecureStorage();
   static Future<bool> signIn(
     String email,
@@ -18,7 +18,39 @@ class AuthService {
       //   'password': password,
       // });
 
-      final response = await http.post(Uri.parse(_url), body: {
+      final response = await http.post(Uri.parse('$_url/login'), body: {
+        'username': 'emilys',
+        'password': 'emilyspass',
+      });
+
+      if (response.statusCode == 200) {
+        final responseData =
+            json.decode(response.body); // String을 Map<String, dynamic>으로 변환
+
+        await storage.write(key: 'accessToken', value: responseData['token']);
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: "Error가 발생했습니다.");
+        return false;
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+      return false;
+    }
+  }
+
+  static Future<bool> signUp(
+    String email,
+    String password,
+    String nickname,
+  ) async {
+    try {
+      // final response = await http.post(Uri.parse('$_url/sign-in'), body: {
+      //   'username': email,
+      //   'password': password,
+      // });
+
+      final response = await http.post(Uri.parse('$_url/login'), body: {
         'username': 'emilys',
         'password': 'emilyspass',
       });
