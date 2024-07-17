@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:our_promise/models/couple-profile.model.dart';
 
 class CoupleProfileService {
-  static final String _url = '${dotenv.get('BASE_URL')}/coupleInfo';
+  static final String _url = '${dotenv.get('BASE_URL')}/couple-profile';
 
   static Future<CoupleProfile?> getCoupleProfile() async {
     try {

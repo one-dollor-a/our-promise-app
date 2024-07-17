@@ -24,7 +24,7 @@ ThemeData initThemeData({required Brightness brightness}) {
         unselectedLabelStyle:
             TextStyle(color: Colors.black, fontSize: 10), // 라벨 스타일
       ),
-      scaffoldBackgroundColor: const Color(0xFFFFF4F4), // 배경색
+      scaffoldBackgroundColor: const Color(0xffFBE6E0), // 배경색
       tabBarTheme: const TabBarTheme(
         labelStyle: TextStyle(color: Colors.black, fontSize: 14), // 탭 스타일
       ),

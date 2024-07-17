@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:our_promise/components/making-copule-nudge.comp.dart';
 import 'package:our_promise/models/couple-profile.model.dart';
 import 'package:our_promise/providers/couple-profile.provider.dart';
 
@@ -30,7 +31,7 @@ class CoupleProfileComp extends ConsumerWidget {
 
   _buildNullCoupleProfile(BuildContext context) {
     return [
-      Text('커플등록하러가기', style: Theme.of(context).textTheme.titleMedium),
+      const MakingCoupleNudgeComp(),
     ];
   }
 }
