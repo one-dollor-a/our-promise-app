@@ -116,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       primary: _isFriend ? Colors.red : Colors.blue,  // 버튼 색상 변경
                     ),
                     child: Text(
-                      _isFriend ? '짝꿍 해제' : '짝꿍 추가',
+                      _isFriend ? '짝꿍 맺기' : '짝꿍 해제',
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),
