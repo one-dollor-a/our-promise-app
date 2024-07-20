@@ -113,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: ElevatedButton(
                     onPressed: _toggleFriendStatus,
                     style: ElevatedButton.styleFrom(
-                      primary: _isFriend ? Colors.red : Colors.blue,  // 버튼 색상 변경
+                      backgroundColor: _isFriend ? Colors.red : Colors.blue,  // 버튼 색상 변경
                     ),
                     child: Text(
                       _isFriend ? '짝꿍 맺기' : '짝꿍 해제',

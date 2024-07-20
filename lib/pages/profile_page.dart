@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-
-
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
-        backgroundColor: AppColor.primary,
+        // brightness: Brightness.dark,
+        // backgroundColor: AppColor.primary,
         elevation: 0,
         centerTitle: true,
         title: Text('My Profile', style: TextStyle(fontFamily: 'inter', fontWeight: FontWeight.w400, fontSize: 16)),

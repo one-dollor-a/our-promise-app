@@ -21,8 +21,14 @@ class _SignUpPageState extends State<SignUpPage> {
       _fromKeySignUp.currentState!.fields['nickname']!.value as String,
     );
     if (!context.mounted) return;
+
+
     if (result == true) {
-      return Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('가입이 완료되었습니다 로그인을 해주세요 !')));
+      // return Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      Navigator.pop(context);
+    } else {
+      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('가입에 실패 했습니다')));
     }
   }
 
@@ -32,19 +38,21 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          '회원가입',
-          style: Theme.of(context).tabBarTheme.labelStyle,
+          'Our Promise 가입하기',
+          style: TextStyle(fontSize: 20),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 100),
-        child: FormBuilder(
-          key: _fromKeySignUp,
+      body: FormBuilder(
+        key: _fromKeySignUp,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               FormBuilderTextField(
                 name: 'email',
+                textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.emailAddress,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(
@@ -62,6 +70,8 @@ class _SignUpPageState extends State<SignUpPage> {
               FormBuilderTextField(
                 name: 'password',
                 obscureText: true,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(
                     errorText: '패스워드를 입력해주세요.',
@@ -84,6 +94,8 @@ class _SignUpPageState extends State<SignUpPage> {
               FormBuilderTextField(
                 name: 'passwordConfirm',
                 obscureText: true,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.equal(
                     _password!,
@@ -97,6 +109,8 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               FormBuilderTextField(
                 name: 'nickname',
+                keyboardType: TextInputType.name,
+                textInputAction: TextInputAction.done,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(
                     errorText: '닉네임을 입력해주세요.',

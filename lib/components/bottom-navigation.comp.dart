@@ -30,12 +30,12 @@ class _BottomNavigationCompState extends State<BottomNavigationComp> {
         ),
         NavigationItem(
           icon: const Icon(Icons.bookmark_border, size: 30),
-          title: "계약서",
+          title: "계약서 보기",
           isSelected: _selectedIndex == 1,
         ),
         NavigationItem(
           icon: const Icon(Icons.favorite_border, size: 30),
-          title: "짝꿍",
+          title: "About 커플",
           isSelected: _selectedIndex == 2,
         ),
         NavigationItem(

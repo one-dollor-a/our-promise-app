@@ -5,6 +5,7 @@ import 'package:our_promise/services/auth.service.dart';
 
 class SignInPage extends StatelessWidget {
   final _fromKeySignIn = GlobalKey<FormBuilderState>();
+
   SignInPage({super.key});
 
   _onPressSignInButton(BuildContext context) async {
@@ -24,19 +25,21 @@ class SignInPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          '로그인',
-          style: Theme.of(context).tabBarTheme.labelStyle,
+          'Our Promise 로그인',
+          style: TextStyle(fontSize: 20),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 100),
-        child: FormBuilder(
-          key: _fromKeySignIn,
+      body: FormBuilder(
+        key: _fromKeySignIn,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 32),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               FormBuilderTextField(
                 name: 'email',
+                textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.emailAddress,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(
@@ -46,7 +49,22 @@ class SignInPage extends StatelessWidget {
                     errorText: '이메일 형식이 아닙니다.',
                   ),
                 ]),
-                decoration: const InputDecoration(labelText: '이메일'),
+                decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  labelText: '이메일',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xfffdc4c4), width: 3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -54,32 +72,51 @@ class SignInPage extends StatelessWidget {
               FormBuilderTextField(
                 name: 'password',
                 obscureText: true,
+                textInputAction: TextInputAction.done,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(
-                    errorText: '패스워드를 입력해주세요.',
+                    errorText: '비밀번호를 입력해주세요.',
                   ),
                   FormBuilderValidators.minLength(
                     8,
-                    errorText: '패스워드는 8자 이상이어야 합니다.',
+                    errorText: '비밀번호는 8자 이상이어야 합니다.',
                   ),
                 ]),
-                decoration: const InputDecoration(labelText: '패스워드'),
+                decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  labelText: '비밀번호',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xfffdc4c4), width: 3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 40,
               ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(
-                    Theme.of(context).colorScheme.primary,
+              SizedBox(
+                height: 48,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                      Theme.of(context).colorScheme.primary,
+                    ),
                   ),
+                  onPressed: () {
+                    if (_fromKeySignIn.currentState!.saveAndValidate()) {
+                      _onPressSignInButton(context);
+                    }
+                  },
+                  child: const Text('로그인', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
                 ),
-                onPressed: () {
-                  if (_fromKeySignIn.currentState!.saveAndValidate()) {
-                    _onPressSignInButton(context);
-                  }
-                },
-                child: const Text('로그인', style: TextStyle(color: Colors.black)),
               ),
             ],
           ),

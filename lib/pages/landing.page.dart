@@ -21,6 +21,7 @@ class LandingPageState extends State<LandingPage> {
   static String? token;
 
   static const storage = FlutterSecureStorage();
+
   @override
   void initState() {
     super.initState();
@@ -49,36 +50,41 @@ class LandingPageState extends State<LandingPage> {
             children: [
               Text(
                 '사랑을 더욱 특별하게, 커플 계약서',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: TextStyle(fontSize: 20, color: Color(0xffBEA7A7)),
               ),
               const Image(image: AssetImage('assets/images/logo.png')),
-              FilledButton(
+              const SizedBox(height: 64,),
+              SizedBox(
+                width: 180,
+                height: 50,
+                child: FilledButton(
                   style: ButtonStyle(
                       backgroundColor:
-                          WidgetStateProperty.all(const Color(0XFFFDC4C4))),
+                          WidgetStateProperty.all(const Color(0XFFFFDCDC))),
                   onPressed: () => _signIn(context),
                   child: Text(
                     '로그인',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: const Color(0xFF552B2B)),
-                  )),
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Color(0xff562525),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16,),
               TextButton(
                 onPressed: () => _signUp(context),
                 child: RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: '계정이 없다면 ',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        text: '계정이 없다면? ',
+                        style: TextStyle(fontSize: 15, color: Colors.black),
                       ),
                       TextSpan(
                         text: '회원가입하기',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: const Color(0xFFC04F4F)),
+                        style: TextStyle(fontSize: 15, color: Color(0xffc04f4f)),
                       ),
                     ],
                   ),
