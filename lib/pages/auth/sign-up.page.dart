@@ -50,6 +50,10 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const Image(image: AssetImage('assets/images/logo.png')),
+              const SizedBox(
+                height: 48,
+              ),
               FormBuilderTextField(
                 name: 'email',
                 textInputAction: TextInputAction.next,
@@ -132,8 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     _onPressSignUpButton(context);
                   }
                 },
-                child:
-                    const Text('회원가입', style: TextStyle(color: Colors.black)),
+                child: const Text('회원가입', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
               ),
             ],
           ),
