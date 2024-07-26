@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:our_promise/components/add-contract.comp.dart';
 import 'package:our_promise/components/bottom-navigation.comp.dart';
-import 'package:our_promise/pages/contract.page.dart';
-import 'package:our_promise/pages/main.page.dart';
-import 'package:our_promise/pages/my-profile.page.dart';
-import 'package:our_promise/pages/shared-profile.page.dart';
+import 'package:our_promise/pages/contract_page.dart';
+import 'package:our_promise/pages/main_page.dart';
+import 'package:our_promise/pages/my_profile_page.dart';
+import 'package:our_promise/pages/shared_profile_page.dart';
 
 class TabsPage extends StatefulWidget {
   TabsPage({super.key});
