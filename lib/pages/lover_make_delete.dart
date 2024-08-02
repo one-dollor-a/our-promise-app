@@ -21,10 +21,19 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool _isFriend = false;  // 짝꿍 상태를 저장하는 변수
+  final String _partnerName = '상대 이름';  // 상대방 이름
 
   void _toggleFriendStatus() {
     setState(() {
       _isFriend = !_isFriend;
+      final message = _isFriend
+          ? '$_partnerName 님과 짝꿍이 되었습니다!'
+          : '$_partnerName 님과 짝꿍이 해제되었습니다';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
     });
   }
 
@@ -48,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: ListView(
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           // Section 1 - Profile Picture Wrapper
           Container(
@@ -101,10 +110,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   label: '이메일',
                   value: 'otheruser@example.com',
                 ),
-                const UserInfoTile(
-                  margin: EdgeInsets.only(bottom: 16),
+                UserInfoTile(
+                  margin: const EdgeInsets.only(bottom: 16),
                   label: '이름',
-                  value: '상대 이름',
+                  value: _partnerName,
                 ),
 
                 Container(
@@ -116,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       backgroundColor: _isFriend ? Colors.red : Colors.blue,  // 버튼 색상 변경
                     ),
                     child: Text(
-                      _isFriend ? '짝꿍 맺기' : '짝꿍 해제',
+                      _isFriend ? '짝꿍 해제' : '짝꿍 맺기',
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),
