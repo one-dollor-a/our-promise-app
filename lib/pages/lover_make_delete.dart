@@ -35,14 +35,20 @@ class _ProfilePageState extends State<ProfilePage> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Row(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Expanded(child: Text('짝꿍과 끊어질 경우 해당 계약서는 없어지며 코드가 변경됩니다. 정말로 $_partnerName 님과 짝꿍을 끊으시겠습니까?')),
+                Image.network(
+                  'https://i.postimg.cc/wvs6M7ds/image.png',
+                  height: 50,
+                ),
+                const SizedBox(height: 10),
+                Text('짝꿍과 끊어질 경우 해당 계약서는 없어지며 코드가 변경됩니다. 정말로 $_partnerName 님과 짝꿍을 끊으시겠습니까?'),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // 돌아가기 버튼을 눌렀을 때 첫 화면으로 돌아가기
                   },
-                  child: Text('돌아가기'),
+                  child: const Text('돌아가기'),
                 ),
               ],
             ),
