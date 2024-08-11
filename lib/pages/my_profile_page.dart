@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:our_promise/services/auth.service.dart';
 
+import '../models/user.dart';
+
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({super.key});
 
@@ -28,13 +30,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
   }
 
   Future<void> _loadUserName() async {
-    final user = await AuthService.getCurrentUser(); // 현재 사용자 정보 가져오기
-    if (user != null) {
-      setState(() {
-        _userName = user.name; // 사용자 이름 설정
-      });
+    User user = await AuthService.getCurrentUser(); // 현재 사용자 정보 가져오기
+    setState(() {
+      _userName = user.nickName!; // 사용자 이름 설정
+      print('test hongchul : $_userName');
+    });
     }
-  }
 
   Future<void> _logout(BuildContext context) async {
     await AuthService.signOut();
@@ -56,113 +57,132 @@ class _MyProfilePageState extends State<MyProfilePage> {
     print('좋아하는 색: $_favoriteColor');
     print('좋아하는 음식: $_favoriteFood');
     print('싫어하는 음식: $_dislikedFood');
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('프로필 수정'),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
+      body: Column(
         children: [
-          Text('이름: $_userName'),
-          const SizedBox(height: 16.0),
-          TextField(
-            decoration: const InputDecoration(labelText: '키 (cm)'),
-            keyboardType: TextInputType.number,
-            onChanged: (value) {
-              setState(() {
-                _height = value;
-              });
-            },
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('이름: $_userName'),
+                    const SizedBox(height: 16.0),
+                    TextField(
+                      decoration: const InputDecoration(labelText: '키 (cm)'),
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        setState(() {
+                          _height = value;
+                        });
+                      },
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(labelText: '몸무게 (kg)'),
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        setState(() {
+                          _weight = value;
+                        });
+                      },
+                    ),
+                    ExpansionTile(
+                      title: const Text('프로필 추가 정보 펼치기', style: TextStyle(fontSize: 20),),
+                      children: [
+                        TextField(
+                          decoration: const InputDecoration(labelText: '생일'),
+                          onChanged: (value) {
+                            setState(() {
+                              _birthday = value;
+                            });
+                          },
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(labelText: 'MBTI'),
+                          onChanged: (value) {
+                            setState(() {
+                              _mbti = value;
+                            });
+                          },
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(labelText: '반지 호수'),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            setState(() {
+                              _ringSize = value;
+                            });
+                          },
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(labelText: '발 사이즈'),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            setState(() {
+                              _shoeSize = value;
+                            });
+                          },
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(labelText: '퍼스널 컬러'),
+                          onChanged: (value) {
+                            setState(() {
+                              _personalColor = value;
+                            });
+                          },
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(labelText: '좋아하는 색'),
+                          onChanged: (value) {
+                            setState(() {
+                              _favoriteColor = value;
+                            });
+                          },
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(labelText: '좋아하는 음식'),
+                          onChanged: (value) {
+                            setState(() {
+                              _favoriteFood = value;
+                            });
+                          },
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(labelText: '싫어하는 음식'),
+                          onChanged: (value) {
+                            setState(() {
+                              _dislikedFood = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                  ],
+                ),
+              ),
+            ),
           ),
-          TextField(
-            decoration: const InputDecoration(labelText: '몸무게 (kg)'),
-            keyboardType: TextInputType.number,
-            onChanged: (value) {
-              setState(() {
-                _weight = value;
-              });
-            },
-          ),
-          const SizedBox(height: 16.0),
-          ExpansionTile(
-            title: const Text('추가 정보'),
-            children: [
-              TextField(
-                decoration: const InputDecoration(labelText: '생일'),
-                onChanged: (value) {
-                  setState(() {
-                    _birthday = value;
-                  });
-                },
+          Container(
+            width: double.infinity,
+            height: 48,
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)
+                  )
               ),
-              TextField(
-                decoration: const InputDecoration(labelText: 'MBTI'),
-                onChanged: (value) {
-                  setState(() {
-                    _mbti = value;
-                  });
-                },
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: '반지 호수'),
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  setState(() {
-                    _ringSize = value;
-                  });
-                },
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: '발 사이즈'),
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  setState(() {
-                    _shoeSize = value;
-                  });
-                },
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: '퍼스널 컬러'),
-                onChanged: (value) {
-                  setState(() {
-                    _personalColor = value;
-                  });
-                },
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: '좋아하는 색'),
-                onChanged: (value) {
-                  setState(() {
-                    _favoriteColor = value;
-                  });
-                },
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: '좋아하는 음식'),
-                onChanged: (value) {
-                  setState(() {
-                    _favoriteFood = value;
-                  });
-                },
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: '싫어하는 음식'),
-                onChanged: (value) {
-                  setState(() {
-                    _dislikedFood = value;
-                  });
-                },
-              ),
-            ],
-          ),
-          const SizedBox(height: 16.0),
-          ElevatedButton(
-            onPressed: _submitProfile,
-            child: const Text('작성완료'),
+              onPressed: _submitProfile,
+              child: const Text('프로필 정보 업데이트', style: TextStyle(fontWeight: FontWeight.bold),),
+            ),
           ),
         ],
       ),

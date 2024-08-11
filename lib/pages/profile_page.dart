@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'lover_make_delete.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -23,7 +26,7 @@ class ProfilePage extends StatelessWidget {
               'Edit',
               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
             ),
-            style: TextButton.styleFrom(primary: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
+            style: TextButton.styleFrom(backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
           ),
         ],
       ),
@@ -33,7 +36,7 @@ class ProfilePage extends StatelessWidget {
         children: [
           // Section 1 - Profile Picture Wrapper
           Container(
-            color: AppColor.primary,
+            color: Colors.black,
             padding: EdgeInsets.symmetric(vertical: 24),
             child: GestureDetector(
               onTap: () {
@@ -89,7 +92,7 @@ class ProfilePage extends StatelessWidget {
                   //label: 'Subscription Type',
                   //value: 'Premium Subscription',
                   //valueBackground: AppColor.secondary,
-                ),
+                // ),
                 UserInfoTile(
                   margin: EdgeInsets.only(bottom: 16),
                   label: '회원 가입 년도',
