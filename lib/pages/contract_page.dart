@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:our_promise/providers/contract.provider.dart';
-import 'package:our_promise/providers/couple-profile.provider.dart';
+import 'package:our_promise/providers/contract_provider.dart';
+import 'package:our_promise/providers/couple_profile_provider.dart';
 import 'package:our_promise/services/contract.service.dart';
 
 class ContractPage extends ConsumerStatefulWidget {

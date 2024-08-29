@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:our_promise/models/couple-profile.model.dart';
+import 'package:our_promise/models/couple_profile_model.dart';
 
 class CoupleProfileNotifier extends Notifier<CoupleProfile?> {
   @override

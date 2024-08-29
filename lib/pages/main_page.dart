@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:our_promise/components/couple-profile.comp.dart';
-import 'package:our_promise/providers/couple-profile.provider.dart';
+import 'package:our_promise/components/couple_profile_comp.dart';
+import 'package:our_promise/providers/couple_profile_provider.dart';
 import 'package:our_promise/services/couple-profile.service.dart';
 
 class MainPage extends ConsumerStatefulWidget {

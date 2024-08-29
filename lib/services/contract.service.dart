@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:our_promise/models/contract.model.dart';
+import 'package:our_promise/models/contract_model.dart';
 
 class ContractService {
   static final String _url = '${dotenv.get('BASE_URL')}/contracts';

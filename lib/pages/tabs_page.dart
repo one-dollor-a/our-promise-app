@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:our_promise/components/add-contract.comp.dart';
-import 'package:our_promise/components/bottom-navigation.comp.dart';
+import 'package:our_promise/components/add_contract_comp.dart';
+import 'package:our_promise/components/bottom_navigation_comp.dart';
 import 'package:our_promise/pages/contract_page.dart';
 import 'package:our_promise/pages/main_page.dart';
 import 'package:our_promise/pages/my_profile_page.dart';
 import 'package:our_promise/pages/shared_profile_page.dart';
+
+import 'my/my_profile_choice_page.dart';
 
 class TabsPage extends StatefulWidget {
   TabsPage({super.key});
@@ -58,7 +60,7 @@ class _TabsPageState extends State<TabsPage> {
               MainPage(),
               ContractPage(),
               SharedProfilePage(),
-              MyProfilePage()
+              MyProfileChoicePage()
             ],
           ),
         ),

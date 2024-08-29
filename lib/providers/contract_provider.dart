@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:our_promise/models/contract.model.dart';
+import 'package:our_promise/models/contract_model.dart';
 
 class ContractNotifier extends Notifier<List<Contract>> {
   @override

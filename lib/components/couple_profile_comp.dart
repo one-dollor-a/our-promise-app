@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:our_promise/components/making-copule-nudge.comp.dart';
-import 'package:our_promise/models/couple-profile.model.dart';
-import 'package:our_promise/providers/couple-profile.provider.dart';
+import 'package:our_promise/components/making_copule_nudge_comp.dart';
+import 'package:our_promise/models/couple_profile_model.dart';
+import 'package:our_promise/providers/couple_profile_provider.dart';
 
 class CoupleProfileComp extends ConsumerWidget {
   const CoupleProfileComp({super.key});
