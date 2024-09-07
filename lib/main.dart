@@ -6,6 +6,8 @@ import 'package:our_promise/pages/auth/sign_in_page.dart';
 import 'package:our_promise/pages/auth/sign-up_page.dart';
 import 'package:our_promise/pages/auth/landing_page.dart';
 import 'package:our_promise/pages/connect_couple_page.dart';
+import 'package:our_promise/pages/my/disconnect_couple_page.dart';
+import 'package:our_promise/pages/my_profile_page.dart';
 import 'package:our_promise/pages/tabs_page.dart';
 
 void main() async {
@@ -34,7 +36,9 @@ class MainAppState extends State<MainApp> {
         '/sign-in': (context) => SignInPage(),
         '/sign-up': (context) => const SignUpPage(),
         '/landing': (context) => const LandingPage(),
+        '/disconnect_couple': (context) => const DisConnectCouplePage(),
         '/connect_couple': (context) => const ConnectCouplePage(),
+        '/my_profile': (context) => const MyProfilePage(),
         '/': (context) => TabsPage(),
       },
       initialRoute: '/landing',
