@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:our_promise/models/couple_profile_model.dart';
 
-class CoupleProfileService {
+class CoupleInfoService {
   static final String _url = '${dotenv.get('BASE_URL')}/couple-profile';
 
   static Future<CoupleProfile?> getCoupleProfile() async {

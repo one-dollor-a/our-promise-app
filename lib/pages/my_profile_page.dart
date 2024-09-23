@@ -44,8 +44,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
   }
 
   void _submitProfile() {
-
-
     print('이름: $_userName');
     print('키: $_height');
     print('몸무게: $_weight');
@@ -63,12 +61,19 @@ class _MyProfilePageState extends State<MyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.all(20),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -93,10 +98,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       },
                     ),
                     ExpansionTile(
-                      title: const Text('프로필 추가 정보 펼치기', style: TextStyle(fontSize: 20),),
+                      tilePadding: EdgeInsets.zero,
+                      title: const Text('프로필 추가 정보 펼치기', style: TextStyle(fontSize: 16, color: Colors.blueAccent),),
                       children: [
                         TextField(
-                          decoration: const InputDecoration(labelText: '생일'),
+                          decoration: const InputDecoration(labelText: '생일', hintStyle: TextStyle(fontSize: 16)),
                           onChanged: (value) {
                             setState(() {
                               _birthday = value;
@@ -171,7 +177,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
           ),
           Container(
             width: double.infinity,
-            height: 48,
+            height: 64,
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -181,7 +187,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   )
               ),
               onPressed: _submitProfile,
-              child: const Text('프로필 정보 업데이트', style: TextStyle(fontWeight: FontWeight.bold),),
+              child: const Text('프로필 정보 업데이트', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
             ),
           ),
         ],

@@ -17,14 +17,14 @@ class CoupleProfileComp extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: switch (coupleProfile) {
             null => _buildNullCoupleProfile(context),
-            _ => _buildCoupleProfile(context, coupleProfile),
+            _ => _buildCoupleProfile(context, coupleProfile.value!),
           }),
     );
   }
 
   _buildCoupleProfile(BuildContext context, CoupleProfile coupleProfile) {
     return [
-      Text(coupleProfile.name, style: Theme.of(context).textTheme.titleMedium),
+      Text(coupleProfile.coupleName, style: Theme.of(context).textTheme.titleMedium),
       Text(coupleProfile.dDay, style: Theme.of(context).textTheme.titleLarge),
     ];
   }
