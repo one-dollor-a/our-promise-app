@@ -14,11 +14,12 @@ class CoupleInfoService {
             coupleProfileFromJson(response.body);
         return coupleProfile;
       } else {
-        Fluttertoast.showToast(msg: "Error가 발생했습니다.");
+        Fluttertoast.showToast(
+            msg: "커플 프로필을 불러오는데 실패했습니다. (상태 코드: ${response.statusCode})");
         return null;
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
+      Fluttertoast.showToast(msg: "커플 프로필 조회 중 오류 발생: ${e.toString()}");
       return null;
     }
   }

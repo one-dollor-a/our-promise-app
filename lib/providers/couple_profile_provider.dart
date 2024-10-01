@@ -2,10 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:our_promise/models/couple_profile_model.dart';
 import 'package:our_promise/repositories/couple_info_repo.dart';
 
-class CoupleProfileNotifier extends AsyncNotifier<CoupleProfile?> {
+import '../models/couple_models.dart';
+
+class CoupleProfileNotifier extends AsyncNotifier<CoupleInfoResponse?> {
   late final CoupleInfoRepository _repository;
   @override
-  Future<CoupleProfile?> build() async {
+  Future<CoupleInfoResponse?> build() async {
     _repository = ref.read(coupleInfoRepositoryProvider);
     return await _repository.getCoupleProfile();
   }
@@ -34,6 +36,6 @@ class CoupleProfileNotifier extends AsyncNotifier<CoupleProfile?> {
 }
 
 final coupleProfileProvider =
-    AsyncNotifierProvider<CoupleProfileNotifier, CoupleProfile?>(() {
+    AsyncNotifierProvider<CoupleProfileNotifier, CoupleInfoResponse?>(() {
   return CoupleProfileNotifier();
 });

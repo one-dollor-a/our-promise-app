@@ -17,11 +17,12 @@ class ContractService {
             .map((contract) => Contract.fromJson(contract))
             .toList();
       } else {
-        Fluttertoast.showToast(msg: "Error가 발생했습니다.");
+        Fluttertoast.showToast(
+            msg: "계약 목록을 불러오는데 실패했습니다. (상태 코드: ${response.statusCode})");
         return [];
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
+      Fluttertoast.showToast(msg: "계약 목록 조회 중 오류 발생: ${e.toString()}");
       return [];
     }
   }

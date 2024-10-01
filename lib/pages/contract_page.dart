@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:our_promise/models/contract_model.dart';
 import 'package:our_promise/providers/contract_provider.dart';
-import 'package:our_promise/providers/couple_profile_provider.dart';
 import 'package:our_promise/services/contract.service.dart';
 
 class ContractPage extends ConsumerStatefulWidget {
   const ContractPage({super.key});
 
   @override
-  ContractPageState createState() => ContractPageState();
+  ConsumerState<ContractPage> createState() => ContractPageState();
 }
 
 class ContractPageState extends ConsumerState<ContractPage> {
+  bool _mounted = false;
+
   @override
-  initState() {
+  void initState() {
     super.initState();
+    _mounted = true;
+    // Future.microtask(() async {
+    //   if (_mounted) {
+    //     final contracts = await ContractService.getContracts();
+    //     if (_mounted) {
+    //       ref.read(contractProvider.notifier).setContracts(contracts);
+    //     }
+    //   }
+    // });
+  }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final isCoupled = ref.read(coupleProfileProvider) != null;
-
-      if (!isCoupled) {
-        return;
-      }
-
-      ContractService.getContracts().then((value) {
-        ref.read(contractProvider.notifier).setContracts(value);
-      });
-    });
+  @override
+  void dispose() {
+    _mounted = false;
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _buildTest();
-  }
-
-  _buildTest() {
     final contracts = ref.watch(contractProvider);
 
     return ListView.builder(
