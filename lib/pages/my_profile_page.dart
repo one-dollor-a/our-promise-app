@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:our_promise/services/auth.service.dart';
 
 import '../models/user.dart';
 
-class MyProfilePage extends StatefulWidget {
+class MyProfilePage extends ConsumerStatefulWidget {
   const MyProfilePage({super.key});
 
   @override
-  _MyProfilePageState createState() => _MyProfilePageState();
+  ConsumerState<MyProfilePage> createState() => _MyProfilePageState();
 }
 
-class _MyProfilePageState extends State<MyProfilePage> {
+class _MyProfilePageState extends ConsumerState<MyProfilePage> {
   String _userName = ''; // 회원가입 시 입력했던 이름을 저장할 변수
   String _height = ''; // 키
   String _weight = ''; // 몸무게
@@ -30,12 +31,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
   }
 
   Future<void> _loadUserName() async {
-    User user = await AuthService.getCurrentUser(); // 현재 사용자 정보 가져오기
+    User? user = await AuthService.getCurrentUser(ref); // ref 파라미터 추가
     setState(() {
-      _userName = user.nickName!; // 사용자 이름 설정
+      _userName = user?.nickName ?? ''; // null 안전성 처리 추가
       print('test hongchul : $_userName');
     });
-    }
+  }
 
   Future<void> _logout(BuildContext context) async {
     await AuthService.signOut();
@@ -55,7 +56,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
     print('좋아하는 색: $_favoriteColor');
     print('좋아하는 음식: $_favoriteFood');
     print('싫어하는 음식: $_dislikedFood');
-
   }
 
   @override
@@ -99,10 +99,16 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ),
                     ExpansionTile(
                       tilePadding: EdgeInsets.zero,
-                      title: const Text('프로필 추가 정보 펼치기', style: TextStyle(fontSize: 16, color: Colors.blueAccent),),
+                      title: const Text(
+                        '프로필 추가 정보 펼치기',
+                        style:
+                            TextStyle(fontSize: 16, color: Colors.blueAccent),
+                      ),
                       children: [
                         TextField(
-                          decoration: const InputDecoration(labelText: '생일', hintStyle: TextStyle(fontSize: 16)),
+                          decoration: const InputDecoration(
+                              labelText: '생일',
+                              hintStyle: TextStyle(fontSize: 16)),
                           onChanged: (value) {
                             setState(() {
                               _birthday = value;
@@ -136,7 +142,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           },
                         ),
                         TextField(
-                          decoration: const InputDecoration(labelText: '퍼스널 컬러'),
+                          decoration:
+                              const InputDecoration(labelText: '퍼스널 컬러'),
                           onChanged: (value) {
                             setState(() {
                               _personalColor = value;
@@ -144,7 +151,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           },
                         ),
                         TextField(
-                          decoration: const InputDecoration(labelText: '좋아하는 색'),
+                          decoration:
+                              const InputDecoration(labelText: '좋아하는 색'),
                           onChanged: (value) {
                             setState(() {
                               _favoriteColor = value;
@@ -152,7 +160,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           },
                         ),
                         TextField(
-                          decoration: const InputDecoration(labelText: '좋아하는 음식'),
+                          decoration:
+                              const InputDecoration(labelText: '좋아하는 음식'),
                           onChanged: (value) {
                             setState(() {
                               _favoriteFood = value;
@@ -160,7 +169,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           },
                         ),
                         TextField(
-                          decoration: const InputDecoration(labelText: '싫어하는 음식'),
+                          decoration:
+                              const InputDecoration(labelText: '싫어하는 음식'),
                           onChanged: (value) {
                             setState(() {
                               _dislikedFood = value;
@@ -183,11 +193,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  )
-              ),
+                      borderRadius: BorderRadius.circular(10))),
               onPressed: _submitProfile,
-              child: const Text('프로필 정보 업데이트', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+              child: const Text(
+                '프로필 정보 업데이트',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
           ),
         ],

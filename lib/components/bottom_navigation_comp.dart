@@ -1,7 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BottomNavigationComp extends StatefulWidget {
+import '../services/auth.service.dart';
+
+class BottomNavigationComp extends ConsumerStatefulWidget {
   final PageController pageController;
 
   const BottomNavigationComp({
@@ -10,10 +13,11 @@ class BottomNavigationComp extends StatefulWidget {
   });
 
   @override
-  State<BottomNavigationComp> createState() => _BottomNavigationCompState();
+  ConsumerState<BottomNavigationComp> createState() =>
+      _BottomNavigationCompState();
 }
 
-class _BottomNavigationCompState extends State<BottomNavigationComp> {
+class _BottomNavigationCompState extends ConsumerState<BottomNavigationComp> {
   int _selectedIndex = 0;
 
   @override
@@ -42,7 +46,7 @@ class _BottomNavigationCompState extends State<BottomNavigationComp> {
           icon: const Icon(Icons.person_outline, size: 30),
           title: "About Me",
           isSelected: _selectedIndex == 3,
-        )
+        ),
       ],
       onTap: (index) {
         setState(() {
@@ -52,6 +56,14 @@ class _BottomNavigationCompState extends State<BottomNavigationComp> {
             duration: const Duration(milliseconds: 200), curve: Curves.linear);
       },
     );
+  }
+
+  void _logout(BuildContext context) async {
+    bool result = await AuthService.logout(ref);
+    if (result) {
+      if (!context.mounted) return;
+      Navigator.pushNamedAndRemoveUntil(context, '/landing', (route) => false);
+    }
   }
 }
 

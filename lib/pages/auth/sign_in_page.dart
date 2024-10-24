@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:our_promise/services/auth.service.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends ConsumerWidget {
   final _fromKeySignIn = GlobalKey<FormBuilderState>();
 
   SignInPage({super.key});
 
-  _onPressSignInButton(BuildContext context) async {
+  _onPressSignInButton(BuildContext context, WidgetRef ref) async {
     final result = await AuthService.signIn(
       _fromKeySignIn.currentState!.fields['email']!.value as String,
       _fromKeySignIn.currentState!.fields['password']!.value as String,
+      ref,
     );
     if (!context.mounted) return;
     if (result == true) {
@@ -20,7 +22,7 @@ class SignInPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -106,16 +108,20 @@ class SignInPage extends StatelessWidget {
                 height: 48,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(
+                    backgroundColor: MaterialStateProperty.all(
                       Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   onPressed: () {
                     if (_fromKeySignIn.currentState!.saveAndValidate()) {
-                      _onPressSignInButton(context);
+                      _onPressSignInButton(context, ref);
                     }
                   },
-                  child: const Text('로그인', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                  child: const Text('로그인',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20)),
                 ),
               ),
             ],

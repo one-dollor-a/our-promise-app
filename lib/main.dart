@@ -9,25 +9,42 @@ import 'package:our_promise/pages/connect_couple_page.dart';
 import 'package:our_promise/pages/my/disconnect_couple_page.dart';
 import 'package:our_promise/pages/my_profile_page.dart';
 import 'package:our_promise/pages/tabs_page.dart';
+import 'package:our_promise/pages/protected_page.dart';
+import 'package:our_promise/providers/auth_provider.dart';
+import 'package:our_promise/services/auth.service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load();
+
   runApp(
-    const ProviderScope(
-      child: MainApp(),
+    ProviderScope(
+      child: const MainApp(),
     ),
   );
 }
 
-class MainApp extends StatefulWidget {
+class MainApp extends ConsumerStatefulWidget {
   const MainApp({super.key});
 
   @override
-  MainAppState createState() => MainAppState();
+  ConsumerState<MainApp> createState() => MainAppState();
 }
 
-class MainAppState extends State<MainApp> {
+class MainAppState extends ConsumerState<MainApp> {
+  @override
+  void initState() {
+    super.initState();
+    _initializeAuth();
+  }
+
+  Future<void> _initializeAuth() async {
+    final savedToken = await AuthService.loadToken();
+    if (savedToken != null) {
+      await ref.read(authProvider.notifier).setToken(savedToken);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,10 +53,18 @@ class MainAppState extends State<MainApp> {
         '/sign-in': (context) => SignInPage(),
         '/sign-up': (context) => const SignUpPage(),
         '/landing': (context) => const LandingPage(),
-        '/disconnect_couple': (context) => const DisConnectCouplePage(),
-        '/connect_couple': (context) => const ConnectCouplePage(),
-        '/my_profile': (context) => const MyProfilePage(),
-        '/': (context) => TabsPage(),
+        '/disconnect_couple': (context) => const ProtectedPage(
+              child: DisConnectCouplePage(),
+            ),
+        '/connect_couple': (context) => const ProtectedPage(
+              child: ConnectCouplePage(),
+            ),
+        '/my_profile': (context) => const ProtectedPage(
+              child: MyProfilePage(),
+            ),
+        '/': (context) => ProtectedPage(
+              child: TabsPage(),
+            ),
       },
       initialRoute: '/landing',
       theme: initThemeData(brightness: Brightness.light),
