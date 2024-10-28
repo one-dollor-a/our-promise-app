@@ -53,12 +53,12 @@ class RemoteDataSource {
 
       if (response.statusCode == 200) {
         final authResponse =
-            AuthSignInResponse.fromJson(jsonDecode(response.body));
+            AuthSignInResponse.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
         await storage.write(
             key: 'accessToken', value: authResponse.accessToken);
         return authResponse;
       } else {
-        Fluttertoast.showToast(msg: "로그인 실패: ${response.body}");
+        Fluttertoast.showToast(msg: "로그인 실패: ${utf8.decode(response.bodyBytes)}");
         return null;
       }
     } catch (e) {
