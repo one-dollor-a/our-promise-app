@@ -19,7 +19,7 @@ class _ConnectCouplePageState extends ConsumerState<ConnectCouplePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '짝꿍 연결',
+          '',
           style: TextStyle(fontSize: 22, fontFamily: 'Pretendard', fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
